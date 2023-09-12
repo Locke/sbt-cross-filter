@@ -47,7 +47,7 @@ lazy val fooJVM = foo.jvm
 
 lazy val bar = (project in file("bar"))
   .settings(
-    crossScalaVersions := Seq("2.12.18", "2.13.11"),
+    crossScalaVersions := Seq("2.12.18", "2.13.11", "3.3.0"),
     scalaVersion := "2.12.18",
     customTask := {
       val projectName = name.value
