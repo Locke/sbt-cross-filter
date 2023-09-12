@@ -1,5 +1,15 @@
-
 lazy val customTask = taskKey[Unit]("does some custom things")
+
+lazy val customTaskAll = taskKey[Unit]("does the custom things of all projects")
+
+val aggregatedProjects = ScopeFilter(inAggregates(ThisProject, includeRoot = false))
+
+customTaskAll := {
+  println("doing the custom task on all aggregated projects...")
+
+  customTask.all(aggregatedProjects).value
+}
+
 
 
 lazy val root = (project in file("."))
