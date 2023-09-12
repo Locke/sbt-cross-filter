@@ -1,3 +1,5 @@
+import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
+
 lazy val customTask = taskKey[Unit]("does some custom things")
 
 lazy val customTaskAll = taskKey[Unit]("does the custom things of all projects")
@@ -22,9 +24,9 @@ lazy val root = (project in file("."))
       println(s"doing some custom things for $projectName with Scala $scalaVersionValue")
     },
   )
-  .aggregate(foo, bar)
+  .aggregate(fooJVM, bar)
 
-lazy val foo = (project in file("foo"))
+lazy val foo = (crossProject(JVMPlatform).crossType(CrossType.Pure) in file("foo"))
   .settings(
     crossScalaVersions := Seq("2.12.18"),
     scalaVersion := "2.12.18",
@@ -34,6 +36,8 @@ lazy val foo = (project in file("foo"))
       println(s"doing some custom things for $projectName with Scala $scalaVersionValue")
     },
   )
+
+lazy val fooJVM = foo.jvm
 
 lazy val bar = (project in file("bar"))
   .settings(
