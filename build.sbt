@@ -33,6 +33,7 @@ lazy val foo = (project in file("foo"))
       val scalaVersionValue = scalaVersion.value
       println(s"doing some custom things for $projectName with Scala $scalaVersionValue")
     },
+    customTask := customTask.dependsOn(Test / compile).value,
   )
 
 lazy val bar = (project in file("bar"))
@@ -44,4 +45,5 @@ lazy val bar = (project in file("bar"))
       val scalaVersionValue = scalaVersion.value
       println(s"doing some custom things for $projectName with Scala $scalaVersionValue")
     },
+    customTask := customTask.dependsOn(Test / compile).value,
   )
