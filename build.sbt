@@ -35,6 +35,11 @@ lazy val foo = (crossProject(JVMPlatform).crossType(CrossType.Pure) in file("foo
       val scalaVersionValue = scalaVersion.value
       println(s"doing some custom things for $projectName with Scala $scalaVersionValue")
     },
+    libraryDependencies ++= Seq(
+      "org.http4s" %%% "http4s-core"         % "0.23.23",
+      "org.http4s" %%% "http4s-client"       % "0.23.23",
+      "org.http4s" %%% "http4s-ember-client" % "0.23.23",
+    ),
   )
 
 lazy val fooJVM = foo.jvm
