@@ -35,6 +35,7 @@ lazy val foo = (crossProject(JVMPlatform).crossType(CrossType.Pure) in file("foo
       val scalaVersionValue = scalaVersion.value
       println(s"doing some custom things for $projectName with Scala $scalaVersionValue")
     },
+    customTask := customTask.dependsOn(Test / compile).value,
     libraryDependencies ++= Seq(
       "org.http4s" %%% "http4s-core"         % "0.23.23",
       "org.http4s" %%% "http4s-client"       % "0.23.23",
@@ -53,4 +54,5 @@ lazy val bar = (project in file("bar"))
       val scalaVersionValue = scalaVersion.value
       println(s"doing some custom things for $projectName with Scala $scalaVersionValue")
     },
+    customTask := customTask.dependsOn(Test / compile).value,
   )
